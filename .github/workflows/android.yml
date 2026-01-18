@@ -61,7 +61,7 @@ jobs:
         mv cmdline-tools/* cmdline-tools/latest || true
 
     # ===============================
-    # ANDROID PACKAGES (AIDL FIX)
+    # ANDROID PACKAGES (AIDL COMPATIBILE)
     # ===============================
     - name: Install Android SDK packages
       run: |
@@ -82,7 +82,7 @@ jobs:
         pip install -r requirements.txt
 
     # ===============================
-    # BUILD APK (AIDL PATH FORZATO)
+    # BUILD APK (NESSUNA CHIAMATA AIDL MANUALE)
     # ===============================
     - name: Build APK with Buildozer
       run: |
@@ -91,8 +91,6 @@ jobs:
         export PATH=$ANDROID_HOME/build-tools/30.0.3:$PATH
         export PATH=$ANDROID_HOME/platform-tools:$PATH
         export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
-        which aidl
-        aidl --version
         buildozer android debug
 
     # ===============================
