@@ -62,20 +62,11 @@ jobs:
         mkdir -p cmdline-tools/latest
         mv cmdline-tools/* cmdline-tools/latest || true
 
-    - name: Set Android environment variables
-      run: |
-        echo "ANDROID_HOME=$HOME/android-sdk" >> $GITHUB_ENV
-        echo "ANDROID_SDK_ROOT=$HOME/android-sdk" >> $GITHUB_ENV
-        echo "PATH=$PATH:$HOME/android-sdk/cmdline-tools/latest/bin" >> $GITHUB_ENV
-        echo "PATH=$PATH:$HOME/android-sdk/platform-tools" >> $GITHUB_ENV
-
     - name: Install Android SDK packages
       run: |
-        yes | sdkmanager --licenses
-        sdkmanager \
-          "platform-tools" \
-          "platforms;android-33" \
-          "build-tools;33.0.2"
+        SDKMANAGER=$HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager
+        yes | $SDKMANAGER --licenses
+        $SDKMANAGER "platform-tools" "platforms;android-33" "build-tools;33.0.2"
 
     # ===============================
     # PYTHON DEPENDENCIES
@@ -95,7 +86,7 @@ jobs:
         buildozer android debug
 
     # ===============================
-    # UPLOAD APK (v4 – NON DEPRECATO)
+    # UPLOAD APK (NON DEPRECATO)
     # ===============================
     - name: Upload APK
       uses: actions/upload-artifact@v4
