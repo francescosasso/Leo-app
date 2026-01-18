@@ -17,18 +17,13 @@ jobs:
       uses: actions/checkout@v4
 
     # ===============================
-    # JAVA 17 (METODO CORRETTO)
+    # JAVA 17 (OBBLIGATORIO)
     # ===============================
     - name: Set up Java 17
       uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
         java-version: '17'
-
-    - name: Verify Java
-      run: |
-        java -version
-        javac -version
 
     # ===============================
     # SYSTEM DEPENDENCIES
@@ -65,14 +60,17 @@ jobs:
         mkdir -p cmdline-tools/latest
         mv cmdline-tools/* cmdline-tools/latest || true
 
+    # ===============================
+    # ANDROID PACKAGES (AIDL FIX)
+    # ===============================
     - name: Install Android SDK packages
       run: |
         SDKMANAGER=$HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager
         yes | $SDKMANAGER --licenses
         $SDKMANAGER \
           "platform-tools" \
-          "platforms;android-33" \
-          "build-tools;33.0.2"
+          "platforms;android-30" \
+          "build-tools;30.0.3"
 
     # ===============================
     # PYTHON + BUILDOZER
@@ -84,14 +82,17 @@ jobs:
         pip install -r requirements.txt
 
     # ===============================
-    # BUILD APK
+    # BUILD APK (AIDL PATH FORZATO)
     # ===============================
     - name: Build APK with Buildozer
       run: |
         export ANDROID_HOME=$HOME/android-sdk
         export ANDROID_SDK_ROOT=$HOME/android-sdk
-        export PATH=$PATH:$ANDROID_HOME/platform-tools
-        export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
+        export PATH=$ANDROID_HOME/build-tools/30.0.3:$PATH
+        export PATH=$ANDROID_HOME/platform-tools:$PATH
+        export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
+        which aidl
+        aidl --version
         buildozer android debug
 
     # ===============================
