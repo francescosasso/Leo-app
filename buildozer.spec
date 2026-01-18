@@ -19,20 +19,20 @@ requirements = python3,kivy,requests,plyer,cython==0.29.36
 # ===============================
 orientation = portrait
 fullscreen = 0
-
 icon.filename = icon.png
 
 # ===============================
-# ANDROID
+# ANDROID (AIDL FIX DEFINITIVO)
 # ===============================
 android.permissions = INTERNET
 
-# ⚠️ BUILD O Z E R COMPATIBILE
 android.api = 30
 android.minapi = 24
+android.ndk_api = 24
+
 android.build_tools_version = 30.0.3
 
-# USA SDK INSTALLATO DAL WORKFLOW
+# QUESTO È FONDAMENTALE
 android.sdk = /home/runner/android-sdk
 
 android.ndk = 25b
@@ -44,6 +44,5 @@ android.allow_backup = True
 # BUILDOZER
 # ===============================
 [buildozer]
-
 log_level = 2
 warn_on_root = 1
