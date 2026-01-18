@@ -9,23 +9,40 @@ source.include_exts = py,png,jpg,json
 
 version = 1.6
 
-requirements = python3,kivy,requests,plyer
+# ===============================
+# PYTHON REQUIREMENTS
+# ===============================
+requirements = python3,kivy,requests,plyer,cython==0.29.36
 
+# ===============================
+# UI
+# ===============================
 orientation = portrait
 fullscreen = 0
 
 icon.filename = icon.png
 
+# ===============================
+# ANDROID
+# ===============================
 android.permissions = INTERNET
 
-android.api = 33
+# ⚠️ BUILD O Z E R COMPATIBILE
+android.api = 30
 android.minapi = 24
-android.ndk = 25b
+android.build_tools_version = 30.0.3
 
+# USA SDK INSTALLATO DAL WORKFLOW
+android.sdk = /home/runner/android-sdk
+
+android.ndk = 25b
 android.archs = arm64-v8a,armeabi-v7a
 
 android.allow_backup = True
 
+# ===============================
+# BUILDOZER
+# ===============================
 [buildozer]
 
 log_level = 2
