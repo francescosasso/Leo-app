@@ -82,15 +82,13 @@ jobs:
         pip install -r requirements.txt
 
     # ===============================
-    # BUILD APK (NESSUNA CHIAMATA AIDL MANUALE)
+    # BUILD APK (SDK FORZATO)
     # ===============================
     - name: Build APK with Buildozer
       run: |
-        export ANDROID_HOME=$HOME/android-sdk
-        export ANDROID_SDK_ROOT=$HOME/android-sdk
-        export PATH=$ANDROID_HOME/build-tools/30.0.3:$PATH
-        export PATH=$ANDROID_HOME/platform-tools:$PATH
-        export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
+        ANDROID_HOME=$HOME/android-sdk \
+        ANDROID_SDK_ROOT=$HOME/android-sdk \
+        PATH=$HOME/android-sdk/build-tools/30.0.3:$HOME/android-sdk/platform-tools:$HOME/android-sdk/cmdline-tools/latest/bin:$PATH \
         buildozer android debug
 
     # ===============================
