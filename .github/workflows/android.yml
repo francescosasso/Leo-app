@@ -14,12 +14,12 @@ jobs:
       - name: Buildozer Action
         uses: ArtemSBulgakov/buildozer-action@v1
         with:
-          buildozer_version: master
           command: buildozer android debug
-          repository_read_token: ${{ secrets.GITHUB_TOKEN }}
+          buildozer_version: master
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Leo-App-Package
           path: bin/*
+          
