@@ -2,31 +2,31 @@ name: Build Android APK
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-22.04
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: "3.10"
 
-    - name: Install system deps
+    - name: Install system dependencies
       run: |
         sudo apt update
         sudo apt install -y \
-          zip unzip openjdk-11-jdk \
+          openjdk-11-jdk \
+          zip unzip \
           build-essential \
-          libncurses5 \
-          libstdc++6
+          libstdc++6 \
+          libncurses5
 
-    - name: Install Python deps
+    - name: Install Python dependencies
       run: |
         pip install --upgrade pip
         pip install buildozer cython==0.29.36
