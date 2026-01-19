@@ -1,8 +1,9 @@
-name: Build Android APK
+name: Build Android App
 
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -20,23 +21,39 @@ jobs:
       run: |
         sudo apt update
         sudo apt install -y \
-          openjdk-11-jdk \
+          openjdk-17-jdk \
           zip unzip \
           build-essential \
           libstdc++6 \
-          libncurses5
+          libncurses5 \
+          autoconf \
+          automake \
+          libtool \
+          pkg-config \
+          zlib1g-dev \
+          libncurses5-dev \
+          libgdbm-dev \
+          libnss3-dev \
+          libssl-dev \
+          libreadline-dev \
+          libffi-dev \
+          wget
 
     - name: Install Python dependencies
       run: |
         pip install --upgrade pip
         pip install buildozer cython==0.29.36
 
-    - name: Build APK
+    - name: Build with Buildozer
       run: |
-        buildozer android debug
+        # Accetta le licenze e avvia la build
+        # Usiamo 'debug' per testare, poi passeremo a 'release' per il Play Store
+        yes | buildozer android debug
+      env:
+        BUILDOZER_WARN_ON_ROOT: 0
 
-    - name: Upload APK
+    - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: Leo-APK
-        path: bin/*.apk
+        name: Leo-App-Package
+        path: bin/*
