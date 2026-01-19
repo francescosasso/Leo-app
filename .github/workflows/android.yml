@@ -34,16 +34,15 @@ jobs:
         echo "/usr/lib/jvm/java-17-openjdk-amd64/bin" >> $GITHUB_PATH
 
     # =========================
-    # ANDROID SDK INSTALL
+    # ANDROID SDK (FIX STRUTTURA)
     # =========================
     - name: Install Android SDK
       run: |
-        mkdir -p $HOME/android-sdk
-        cd $HOME/android-sdk
+        mkdir -p $HOME/android-sdk/cmdline-tools
+        cd $HOME/android-sdk/cmdline-tools
         wget https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
         unzip commandlinetools-linux-*.zip
-        mkdir -p cmdline-tools/latest
-        mv cmdline-tools/* cmdline-tools/latest
+        mv cmdline-tools latest
 
     - name: Set Android SDK env
       run: |
@@ -52,7 +51,7 @@ jobs:
         echo "$HOME/android-sdk/cmdline-tools/latest/bin" >> $GITHUB_PATH
         echo "$HOME/android-sdk/platform-tools" >> $GITHUB_PATH
 
-    - name: Install Android SDK packages (AIDL FIX)
+    - name: Install Android SDK packages
       run: |
         yes | sdkmanager --licenses
         sdkmanager \
