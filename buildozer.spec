@@ -1,6 +1,5 @@
 [app]
-
-title = Leó
+title = Leo
 package.name = leo
 package.domain = org.sassofrancesco
 
@@ -17,24 +16,11 @@ fullscreen = 0
 icon.filename = icon.png
 
 android.permissions = INTERNET
-
-# =========================
-# ANDROID STABILE
-# =========================
-android.api = 30
+android.api = 33
 android.minapi = 24
-android.ndk = 23b
-android.ndk_api = 24
+android.ndk = 25b
 
 android.archs = arm64-v8a,armeabi-v7a
-
-android.sdk = /home/runner/android-sdk
-
-# 🔴 FIX CRITICI
-android.skip_update = True
-android.clean_build = True
-android.enable_androidx = False
-
 android.allow_backup = True
 
 [buildozer]
