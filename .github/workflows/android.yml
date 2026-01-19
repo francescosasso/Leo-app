@@ -6,20 +6,32 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
 
-      - name: Buildozer Action
-        uses: ArtemSBulgakov/buildozer-action@v1
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          command: buildozer android debug
-          buildozer_version: master
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y openjdk-17-jdk zip unzip build-essential libltdl-dev libffi-dev libssl-dev autoconf automake libtool pkg-config zlib1g-dev
+          pip install --upgrade pip
+          pip install "buildozer>=1.5.0" "cython<3.0"
+
+      - name: Build with Buildozer
+        run: |
+          # Accetta licenze e compila
+          yes | buildozer android debug
+        env:
+          BUILDOZER_WARN_ON_ROOT: 0
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Leo-App-Package
-          path: bin/*
+          name: Leo-App-Debug
+          path: bin/*.apk
           
