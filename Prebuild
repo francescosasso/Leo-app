@@ -1,4 +1,0 @@
-export P4A_RELEASE_KEYSTORE=my-release-key.keystore
-export P4A_RELEASE_KEYSTORE_PASSWD=la_tua_password
-export P4A_RELEASE_KEYALIAS_PASSWD=la_tua_password
-export P4A_RELEASE_KEYALIAS=leo_alias
