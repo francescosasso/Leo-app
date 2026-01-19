@@ -1,4 +1,5 @@
 [app]
+
 title = Leo
 package.name = leo
 package.domain = org.sassofrancesco
@@ -17,12 +18,17 @@ icon.filename = icon.png
 
 android.permissions = INTERNET
 
-# 🔴 QUI È LA CHIAVE
+# 🔴 FONDAMENTALE: API 30 (NO AIDL)
 android.api = 30
-android.minapi = 24
+android.minapi = 21
+
+# NON specificare NDK → buildozer sceglie quello giusto
+# NON specificare build-tools
 
 android.archs = arm64-v8a,armeabi-v7a
+
 android.allow_backup = True
+
 
 [buildozer]
 log_level = 2
