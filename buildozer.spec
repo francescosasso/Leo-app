@@ -25,7 +25,7 @@ android.minapi = 21
 # NON specificare NDK → buildozer sceglie quello giusto
 # NON specificare build-tools
 
-android.archs = arm64-v8a,armeabi-v7a
+android.archs = arm64-v8a
 
 android.allow_backup = True
 
