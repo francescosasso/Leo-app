@@ -7,22 +7,19 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/kivy/buildozer:master  # Immagine ufficiale Kivy con tutto pronto
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Build with Buildozer
-      run: |
-        # Usiamo l'utente root del container per evitare problemi di permessi
-        buildozer android debug
-      env:
-        BUILDOZER_ALLOW_KIVY_USER: 0
-        BUILDOZER_WARN_ON_ROOT: 0
+      - name: Buildozer Action
+        uses: ArtemSBulgakov/buildozer-action@v1
+        with:
+          buildozer_version: master
+          command: buildozer android debug
+          repository_read_token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: Leo-App-Package
-        path: bin/*
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Leo-App-Package
+          path: bin/*
