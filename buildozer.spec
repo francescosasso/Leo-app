@@ -18,22 +18,21 @@ icon.filename = icon.png
 
 android.permissions = INTERNET
 
-# =========================
-# ANDROID (VERSIONI STABILI)
-# =========================
 android.api = 30
 android.minapi = 24
-android.ndk_api = 24
 android.ndk = 23b
+android.ndk_api = 24
 
 android.archs = arm64-v8a,armeabi-v7a
 
-# 🔑 QUESTA RIGA È FONDAMENTALE PER AIDL
+# Forza SDK
 android.sdk = /home/runner/android-sdk
+
+# IMPORTANTISSIMO
+android.skip_update = True
 
 android.allow_backup = True
 
 [buildozer]
-
 log_level = 2
 warn_on_root = 1
