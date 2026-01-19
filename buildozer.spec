@@ -16,9 +16,10 @@ fullscreen = 0
 icon.filename = icon.png
 
 android.permissions = INTERNET
-android.api = 33
+
+# 🔴 QUI È LA CHIAVE
+android.api = 30
 android.minapi = 24
-android.ndk = 25b
 
 android.archs = arm64-v8a,armeabi-v7a
 android.allow_backup = True
