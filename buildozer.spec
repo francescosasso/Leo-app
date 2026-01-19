@@ -18,6 +18,9 @@ icon.filename = icon.png
 
 android.permissions = INTERNET
 
+# =========================
+# ANDROID STABILE
+# =========================
 android.api = 30
 android.minapi = 24
 android.ndk = 23b
@@ -25,11 +28,12 @@ android.ndk_api = 24
 
 android.archs = arm64-v8a,armeabi-v7a
 
-# Forza SDK
 android.sdk = /home/runner/android-sdk
 
-# IMPORTANTISSIMO
+# 🔴 FIX CRITICI
 android.skip_update = True
+android.clean_build = True
+android.enable_androidx = False
 
 android.allow_backup = True
 
