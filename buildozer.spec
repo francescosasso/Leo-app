@@ -18,12 +18,18 @@ icon.filename = icon.png
 
 android.permissions = INTERNET
 
-# 🔽 VERSIONI STABILI PER BUILDOZER
+# =========================
+# ANDROID (VERSIONI STABILI)
+# =========================
 android.api = 30
 android.minapi = 24
+android.ndk_api = 24
 android.ndk = 23b
 
 android.archs = arm64-v8a,armeabi-v7a
+
+# 🔑 QUESTA RIGA È FONDAMENTALE PER AIDL
+android.sdk = /home/runner/android-sdk
 
 android.allow_backup = True
 
