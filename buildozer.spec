@@ -16,10 +16,9 @@ android.permissions = INTERNET
 # ⚠️ VERSIONI STABILI
 android.api = 33
 android.minapi = 21
-android.build_tools_version = 33.0.2
 
-android.archs = arm64-v8a
-android.allow_backup = True
+android.ndk_version = 25.2.9519653
+android.build_tools_version = 33.0.2
 
 [buildozer]
 log_level = 2
