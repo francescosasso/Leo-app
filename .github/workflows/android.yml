@@ -1,4 +1,4 @@
-name: Build Android App
+name: Build Android APK (Debug)
 
 on:
   push:
@@ -41,7 +41,7 @@ jobs:
           rm -rf ~/.buildozer
           rm -rf .buildozer
 
-      - name: Install Android SDK, Build-Tools e NDK
+      - name: Install Android SDK + NDK
         env:
           ANDROID_SDK_ROOT: /home/runner/.buildozer/android/platform/android-sdk
         run: |
@@ -68,16 +68,16 @@ jobs:
           mkdir -p $SDK/tools/bin
           ln -sf $SDK/cmdline-tools/latest/bin/sdkmanager $SDK/tools/bin/sdkmanager
 
-      - name: Build AAB (release, pubblicabile)
+      - name: Build APK (DEBUG)
         env:
           BUILDOZER_WARN_ON_ROOT: 0
           APP_ANDROID_ACCEPT_SDK_LICENSE: "1"
           GRADLE_OPTS: "-Dorg.gradle.daemon=false"
         run: |
-          buildozer android release aab --verbose
+          buildozer android debug --verbose
 
-      - name: Upload AAB
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: aab
-          path: bin/*.aab
+          name: apk-debug
+          path: bin/*.apk
