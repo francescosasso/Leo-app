@@ -26,6 +26,7 @@ jobs:
             zip unzip \
             build-essential \
             libffi-dev libssl-dev \
+            libgl1-mesa-dev \
             autoconf automake libtool \
             pkg-config zlib1g-dev \
             libncurses5
@@ -67,15 +68,16 @@ jobs:
           mkdir -p $SDK/tools/bin
           ln -sf $SDK/cmdline-tools/latest/bin/sdkmanager $SDK/tools/bin/sdkmanager
 
-      - name: Build APK (debug)
+      - name: Build AAB (release, pubblicabile)
         env:
           BUILDOZER_WARN_ON_ROOT: 0
           APP_ANDROID_ACCEPT_SDK_LICENSE: "1"
+          GRADLE_OPTS: "-Dorg.gradle.daemon=false"
         run: |
-          buildozer android debug --verbose
+          buildozer android release aab --verbose
 
-      - name: Upload APK
+      - name: Upload AAB
         uses: actions/upload-artifact@v4
         with:
-          name: apk
-          path: bin/*.apk
+          name: aab
+          path: bin/*.aab
