@@ -38,7 +38,25 @@ jobs:
           rm -rf ~/.buildozer
           rm -rf .buildozer
 
-      - name: Build APK (DEBUG)
+      - name: Install Android SDK / NDK
+        env:
+          ANDROID_SDK_ROOT: /home/runner/.buildozer/android/platform/android-sdk
+        run: |
+          mkdir -p $ANDROID_SDK_ROOT
+          cd $ANDROID_SDK_ROOT
+
+          wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip
+          unzip commandlinetools-linux-9477386_latest.zip
+          mkdir -p cmdline-tools/latest
+          mv cmdline-tools/* cmdline-tools/latest/
+
+          yes | cmdline-tools/latest/bin/sdkmanager --licenses
+          cmdline-tools/latest/bin/sdkmanager \
+            "platforms;android-33" \
+            "build-tools;33.0.2" \
+            "ndk;25.2.9519653"
+
+      - name: Build APK
         env:
           BUILDOZER_WARN_ON_ROOT: 0
           APP_ANDROID_ACCEPT_SDK_LICENSE: "1"
