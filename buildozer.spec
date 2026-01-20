@@ -20,7 +20,9 @@ android.api = 33
 android.minapi = 21
 android.ndk_version = 25.2.9519653
 android.build_tools_version = 33.0.2
-android.archs = arm64-v8a
+
+# 🔥 FONDAMENTALE: doppia architettura
+android.archs = arm64-v8a,armeabi-v7a
 
 android.allow_backup = True
 android.enable_androidx = True
