@@ -15,16 +15,13 @@ jobs:
         with:
           python-version: "3.10"
 
-      # --- SISTEMA DI CACHE ---
       - name: Cache Buildozer
         uses: actions/cache@v3
         with:
           path: .buildozer
-          # La chiave cambia solo se modifichi il file buildozer.spec
           key: ${{ runner.os }}-buildozer-${{ hashFiles('buildozer.spec') }}
           restore-keys: |
             ${{ runner.os }}-buildozer-
-      # ------------------------
 
       - name: Install dependencies
         run: |
@@ -35,9 +32,16 @@ jobs:
 
       - name: Build with Buildozer
         run: |
+          # Forza l'accettazione di TUTTE le licenze Android SDK
+          mkdir -p -v $HOME/.android
+          touch $HOME/.android/repositories.cfg
+          # Questo comando accetta le licenze prima di iniziare
+          yes | buildozer android debug || true
+          # Ora avviamo la build vera e propria
           buildozer android debug
         env:
           BUILDOZER_WARN_ON_ROOT: 0
+          # Parametro extra per forzare l'accettazione
           APP_ANDROID_ACCEPT_SDK_LICENSE: "1"
 
       - name: Upload Artifact
@@ -45,3 +49,4 @@ jobs:
         with:
           name: Leo-App-Debug
           path: bin/*.apk
+          
