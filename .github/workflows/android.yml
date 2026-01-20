@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -26,7 +27,8 @@ jobs:
             build-essential \
             libffi-dev libssl-dev \
             autoconf automake libtool \
-            pkg-config zlib1g-dev
+            pkg-config zlib1g-dev \
+            libncurses5
 
       - name: Install Python dependencies
         run: |
@@ -38,7 +40,7 @@ jobs:
           rm -rf ~/.buildozer
           rm -rf .buildozer
 
-      - name: Install Android SDK / NDK
+      - name: Install Android SDK, Build-Tools e NDK
         env:
           ANDROID_SDK_ROOT: /home/runner/.buildozer/android/platform/android-sdk
         run: |
@@ -47,16 +49,19 @@ jobs:
 
           wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip
           unzip commandlinetools-linux-9477386_latest.zip
+
+          rm -rf cmdline-tools/latest
           mkdir -p cmdline-tools/latest
-          mv cmdline-tools/* cmdline-tools/latest/
+          mv cmdline-tools/bin cmdline-tools/lib cmdline-tools/latest/
 
           yes | cmdline-tools/latest/bin/sdkmanager --licenses
+
           cmdline-tools/latest/bin/sdkmanager \
             "platforms;android-33" \
             "build-tools;33.0.2" \
             "ndk;25.2.9519653"
 
-      - name: Build APK
+      - name: Build APK (debug)
         env:
           BUILDOZER_WARN_ON_ROOT: 0
           APP_ANDROID_ACCEPT_SDK_LICENSE: "1"
