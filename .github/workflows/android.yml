@@ -61,6 +61,12 @@ jobs:
             "build-tools;33.0.2" \
             "ndk;25.2.9519653"
 
+      - name: Fix sdkmanager path for Buildozer
+        run: |
+          SDK=/home/runner/.buildozer/android/platform/android-sdk
+          mkdir -p $SDK/tools/bin
+          ln -sf $SDK/cmdline-tools/latest/bin/sdkmanager $SDK/tools/bin/sdkmanager
+
       - name: Build APK (debug)
         env:
           BUILDOZER_WARN_ON_ROOT: 0
