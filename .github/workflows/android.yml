@@ -24,16 +24,9 @@ jobs:
 
       - name: Build with Buildozer
         run: |
-          # Non usiamo 'clean' per evitare di cancellare file necessari
-          # Usiamo 'yes' per le licenze e avviamo la build
-          yes | buildozer android debug
+          # Accettiamo le licenze in modo silenzioso
+          export APP_ANDROID_ACCEPT_SDK_LICENSE="1"
+          # Avviamo la build senza 'yes' per evitare il Broken Pipe
+          buildozer android debug
         env:
           BUILDOZER_WARN_ON_ROOT: 0
-          APP_ANDROID_ACCEPT_SDK_LICENSE: "1"
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: Leo-App-Debug
-          path: bin/*.apk
-          
