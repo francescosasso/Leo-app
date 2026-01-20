@@ -21,11 +21,17 @@ android.minapi = 21
 android.ndk_version = 25.2.9519653
 android.build_tools_version = 33.0.2
 
-# 🔥 FONDAMENTALE: doppia architettura
+# 🔥 doppia architettura (più stabile)
 android.archs = arm64-v8a,armeabi-v7a
 
 android.allow_backup = True
 android.enable_androidx = True
+
+# 🔥 DISABILITA pygame (CAUSA DEL CRASH)
+android.disable_pygame = True
+
+# 🔥 ESCLUDE MODULI pygame DI KIVY
+android.blacklist_src = **/audio_pygame.py,**/camera,**/pygame
 
 [buildozer]
 log_level = 2
