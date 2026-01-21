@@ -21,16 +21,15 @@ android.minapi = 21
 android.ndk_version = 25.2.9519653
 android.build_tools_version = 33.0.2
 
-android.archs = arm64-v8a,armeabi-v7a
+# 🔥 UNA SOLA ARCH (meno memoria)
+android.archs = armeabi-v7a
 
 android.allow_backup = True
 android.enable_androidx = True
 
-# ---------------- FIX KIVY (CRITICO) ----------------
-# Disabilita completamente pygame
+# 🔥 DISABILITA roba non Android
 android.disable_pygame = True
 
-# Escludi TUTTI i provider NON Android
 android.blacklist_src = \
     **/pygame/**,\
     **/audio_pygame.py,\
@@ -41,8 +40,8 @@ android.blacklist_src = \
     **/img_ffpyplayer.py,\
     **/ffpyplayer/**
 
-# Forza uso provider Android
-android.add_jars = android-support-v4.jar
+# 🔥 CHIAVE: NIENTE BYTECODE (RISOLVE IL CRASH)
+android.no_byte_compile = True
 
 [buildozer]
 log_level = 2
