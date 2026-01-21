@@ -21,17 +21,22 @@ android.minapi = 21
 android.ndk_version = 25.2.9519653
 android.build_tools_version = 33.0.2
 
-# 🔥 doppia architettura (più stabile)
 android.archs = arm64-v8a,armeabi-v7a
 
 android.allow_backup = True
 android.enable_androidx = True
 
-# 🔥 DISABILITA pygame (CAUSA DEL CRASH)
+# 🔥 DISABILITA MODULI NON SUPPORTATI SU ANDROID
 android.disable_pygame = True
 
-# 🔥 ESCLUDE MODULI pygame DI KIVY
-android.blacklist_src = **/audio_pygame.py,**/camera,**/pygame
+# 🔥 ESCLUDI PROVIDER VIDEO / IMAGE PROBLEMATICI
+android.blacklist_src = \
+    **/audio_pygame.py,\
+    **/camera,\
+    **/pygame,\
+    **/ffpyplayer,\
+    **/img_dds.py,\
+    **/img_ffpyplayer.py
 
 [buildozer]
 log_level = 2
