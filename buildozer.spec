@@ -15,7 +15,7 @@ icon.filename = icon.png
 
 android.permissions = INTERNET
 
-# ANDROID
+# ---------------- ANDROID ----------------
 android.api = 33
 android.minapi = 21
 android.ndk_version = 25.2.9519653
@@ -26,17 +26,23 @@ android.archs = arm64-v8a,armeabi-v7a
 android.allow_backup = True
 android.enable_androidx = True
 
-# 🔥 DISABILITA MODULI NON SUPPORTATI SU ANDROID
+# ---------------- FIX KIVY (CRITICO) ----------------
+# Disabilita completamente pygame
 android.disable_pygame = True
 
-# 🔥 ESCLUDI PROVIDER VIDEO / IMAGE PROBLEMATICI
+# Escludi TUTTI i provider NON Android
 android.blacklist_src = \
+    **/pygame/**,\
     **/audio_pygame.py,\
-    **/camera,\
-    **/pygame,\
-    **/ffpyplayer,\
+    **/camera/**,\
+    **/camera_picamera.py,\
+    **/camera_opencv.py,\
     **/img_dds.py,\
-    **/img_ffpyplayer.py
+    **/img_ffpyplayer.py,\
+    **/ffpyplayer/**
+
+# Forza uso provider Android
+android.add_jars = android-support-v4.jar
 
 [buildozer]
 log_level = 2
